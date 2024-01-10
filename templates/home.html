@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Monopoly</title>
+	</head>
+	<body>
+        {% with messages = get_flashed_messages(with_categories = True) %} 
+            {% if messages %} 
+                {% for category, message in messages %} 
+                    <div class="flash-message-container">
+                        <div class="{{ category }}-message">
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endfor %} 
+            {% endif %}
+		{% endwith %}
+
+        <form class="card" id="get-players" action="api/getPlayers" method="POST">
+            <h3>How Many Players?</h3>
+            <input type="number" id="playerCount" name="playerCount" min="1" max="6"><br><br>
+            <h3>How Many Bots?</h3>
+            <input type="number" id="botCount" name="botCount" min="1" max="5"><br><br>
+            
+            <button type="submit" id="btnNext" onclick="validate()">Next</button>
+        </form>
+
+        <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+    </body>
+</html>
